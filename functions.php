@@ -18,20 +18,25 @@
         if ($usa_simboli) {
             $caratteri .= '!@#$%^&*()-_=+[]{}|;:,.<>?';
         }
-
+    
+        // verifichiamo se ci sono caratteri disponibili per generare la password
+        if (empty($caratteri)) {
+            return 'Seleziona almeno un tipo di carattere.';
+        }
+    
         // lunghezza della stringa di caratteri
         $lunghezza_caratteri = strlen($caratteri);
         $password = '';
-
+    
         // generazione della password utilizzando caratteri casuali
         for ($i = 0; $i < $lunghezza; $i++) {
             // se la ripetizione dei caratteri non è consentita tramite checkbox, non inseriamo lo stesso carattere 2 volte
             do {
                 $carattere_scelto = $caratteri[rand(0, $lunghezza_caratteri - 1)];
             } while (!$ripetizione_caratteri && $i > 0 && $carattere_scelto === $password[$i - 1]);
-
+    
             $password .= $carattere_scelto;
         }
-
+    
         return $password;
     }

@@ -4,6 +4,13 @@ include 'functions.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['lunghezza'])) {
     $lunghezza = $_GET['lunghezza'];
+    
+    // verifichiamo se la lunghezza è stata specificata e se è maggiore di 0
+    if (!isset($lunghezza) || $lunghezza < 1) {
+        // se la lunghezza non è stata impostata diamo un messaggio di errore
+        echo "Specifica una lunghezza valida per la password.";
+        exit();
+    }
     $usa_numeri = isset($_GET['usa_numeri']);
     $usa_lettere_maiuscole = isset($_GET['usa_lettere_maiuscole']);
     $usa_lettere_minuscole = isset($_GET['usa_lettere_minuscole']);
