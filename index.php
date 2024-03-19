@@ -1,3 +1,24 @@
+<?php
+session_start();
+include 'functions.php';
+
+if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['lunghezza'])) {
+    $lunghezza = $_GET['lunghezza'];
+    $usa_numeri = isset($_GET['usa_numeri']);
+    $usa_lettere_maiuscole = isset($_GET['usa_lettere_maiuscole']);
+    $usa_lettere_minuscole = isset($_GET['usa_lettere_minuscole']);
+    $usa_simboli = isset($_GET['usa_simboli']);
+    $ripetizione_caratteri = isset($_GET['ripetizione_caratteri']);
+
+    $password_generata = generaPassword($lunghezza, $usa_numeri, $usa_lettere_maiuscole, $usa_lettere_minuscole, $usa_simboli, $ripetizione_caratteri);
+
+    $_SESSION['password_generata'] = $password_generata;
+
+    header("Location: show_password.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="it IT">
 <head>
@@ -53,30 +74,7 @@
         </form>
     </div>
 
-    <div class="container">
-        <?php 
-
-            // includiamo il file functions
-            include 'functions.php';
-            
-            // controllo sulla richiesta GET per la lunghezza della password
-            if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['lunghezza'])) {
-                $lunghezza = $_GET['lunghezza'];
-                $usa_numeri = isset($_GET['usa_numeri']);
-                $usa_lettere_maiuscole = isset($_GET['usa_lettere_maiuscole']);
-                $usa_lettere_minuscole = isset($_GET['usa_lettere_minuscole']);
-                $usa_simboli = isset($_GET['usa_simboli']);
-                $ripetizione_caratteri = isset($_GET['ripetizione_caratteri']);
-
-                // visualizziamo la password casuale dopo averla generata
-                $password_generata = generaPassword($lunghezza, $usa_numeri, $usa_lettere_maiuscole, $usa_lettere_minuscole, $usa_simboli, $ripetizione_caratteri);
-                echo "<h2>Password Casuale Generata:</h2>";
-                echo "<p>$password_generata</p>";
-            }
-
-        ?>
-    </div>
-    
+   
     <!-- script bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
