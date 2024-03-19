@@ -1,6 +1,6 @@
 <?php
     // funzione per generare una password casuale
-    function generaPassword($lunghezza, $usa_numeri = false, $usa_lettere_maiuscole = false, $usa_lettere_minuscole = false, $usa_simboli = false, $ripetizione_caratteri = false) {
+    function generaPassword($lunghezza, $usa_numeri = true, $usa_lettere_maiuscole = true, $usa_lettere_minuscole = true, $usa_simboli = false, $ripetizione_caratteri = false) {
         // possibili caratteri per la password in base ai parametri forniti
         $caratteri = '';
         if ($usa_numeri) {
