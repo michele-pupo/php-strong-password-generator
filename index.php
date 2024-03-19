@@ -1,3 +1,30 @@
+<?php
+    // funzione per generare una password casuale
+    function generaPassword($lunghezza) {
+        // caratteri possibili della password da generare
+        $caratteri = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()-_=+[]{}|;:,.<>?';
+        $lunghezza_caratteri = strlen($caratteri);
+        $password = '';
+
+        // generiamo una password casuale utilizzando caratteri casuali
+        for ($i = 0; $i < $lunghezza; $i++) {
+            $password .= $caratteri[rand(0, $lunghezza_caratteri - 1)];
+        }
+
+        return $password;
+    }
+
+    // controllo sulla richiesta GET per la lunghezza della password
+    if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['lunghezza'])) {
+        $lunghezza = $_GET['lunghezza'];
+
+        // visualizziamo la password casuale dopo averla generata
+        $password_generata = generaPassword($lunghezza);
+        echo "<h2>Password Casuale Generata:</h2>";
+        echo "<p>$password_generata</p>";
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="it IT">
 <head>
@@ -10,7 +37,13 @@
 </head>
 <body>
     <div class="container">
-    <h1>PHP Strong Password Generator</h1>
+        <h1>PHP Strong Password Generator</h1>
+
+        <form action="index.php" method="get">
+            <label for="lunghezza">Lunghezza della Password:</label>
+            <input type="number" id="lunghezza" name="lunghezza" min="8" required>
+            <button type="submit">Genera Password</button>
+        </form>
     </div>
     
     <!-- script bootstrap -->
