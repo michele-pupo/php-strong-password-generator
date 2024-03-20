@@ -1,7 +1,5 @@
 <?php
 
-    session_start();
-    
     // funzione per generare una password casuale
     function generaPassword($lunghezza, $usa_numeri = true, $usa_lettere_maiuscole = true, $usa_lettere_minuscole = true, $usa_simboli = false, $ripetizione_caratteri = false) {
         // possibili caratteri per la password in base ai parametri forniti
